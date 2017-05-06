@@ -9,7 +9,7 @@
     <div>
         <p>
             @Html.TextBox("CEP", ViewBag.CEP as string, new { @class ="form-control"})
-            <input id="pesquisa" type="button" value="Pesquisar" onclick="pesquisaCEP" class="form-control" />
+            <input id="pesquisa" type="button" value="Pesquisar" onclick="pesquisarCEP();" class="form-control" />
             
         </p>
         <p id="Logradouro"></p>
@@ -23,17 +23,17 @@
     function pesquisarCEP() {
         var ncep = $("#CEP").val();
         $.ajax({
-            datatype: "jason",
+            datatype: "json",
             type: 'GET',
             url: '/api/Correios/' + ncep,
             cache: false,
             async: false,
-            sucess: function (dados) {
-                $("#Logradouro").html(dados.Logradouro);
+            success: function (dados) {
+                $('#Logradouro').html(dados.Logradouro);
             },
 
             error: function (erro) {
-                $("#Logradouro").html(erro);
+                $('#Logradouro').html("erro");
            }
         });
     }
