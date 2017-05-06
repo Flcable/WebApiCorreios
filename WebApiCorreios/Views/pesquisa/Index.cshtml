@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Pesquisa CEP</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        <p>
+            @Html.TextBox("CEP", ViewBag.CEP as string, new { @class ="form-control"})
+            <input id="pesquisa" type="button" value="Pesquisar" onclick="pesquisaCEP" class="form-control" />
+            
+        </p>
+        <p id="Logradouro"></p>
+        <p id="Bairro"></p>
+        <p id="Cdade"></p>
+        <p id="UF"></p>
+    </div>
+}
+
+<script type="text/javascript">
+    function pesquisarCEP() {
+        var ncep = $("#CEP").val();
+        $.ajax({
+            datatype: "jason",
+            type: 'GET',
+            url: '/api/Correios/' + ncep,
+            cache: false,
+            async: false,
+            sucess: function (dados) {
+                $("#Logradouro").html(dados.Logradouro);
+            },
+
+            error: function (erro) {
+                $("#Logradouro").html(erro);
+           }
+        });
+    }
+</script>
+
