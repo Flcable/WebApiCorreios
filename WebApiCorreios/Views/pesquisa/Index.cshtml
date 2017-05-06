@@ -14,7 +14,7 @@
         </p>
         <p id="Logradouro"></p>
         <p id="Bairro"></p>
-        <p id="Cdade"></p>
+        <p id="Cidade"></p>
         <p id="UF"></p>
     </div>
 }
@@ -30,6 +30,7 @@
             async: false,
             success: function (dados) {
                 $('#Logradouro').html(dados.Logradouro);
+                $('#Bairro').html(dados.Bairro);
             },
 
             error: function (erro) {
